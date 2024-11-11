@@ -1,0 +1,31 @@
+run_name: rm_smol135m
+output_dir: rm_smol135m
+hub_model_id: SmolLM2-135M-Instruct_tldr-rm
+output_global_parent_dir: /network/scratch/n/noukhovm/rlhf-bpo/results
+wandb_run_id: slurm
+push_to_hub: True
+# 
+model_name_or_path: mnoukhov/SmolLM2-135M-Instruct_tldr-sft
+dataset_name: mnoukhov/summarize_from_feedback_oai_preprocessing_1706381144_relabel_pythia6.9b
+dataset_test_split: validation
+learning_rate: 1.0e-5
+lr_scheduler_type: cosine
+bf16: True
+torch_dtype: bfloat16
+gradient_accumulation_steps: 8
+per_device_train_batch_size: 8
+per_device_eval_batch_size: 8
+num_train_epochs: 1
+max_length: 640
+## peft
+use_peft: False
+gradient_checkpointing: False
+## save strategy
+evaluation_strategy: "steps"
+eval_steps: 0.2
+save_strategy: steps
+save_steps: 0.2
+hub_strategy: all_checkpoints
+logging_steps: 100
+ddp_find_unused_parameters: False
+
