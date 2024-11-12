@@ -25,21 +25,21 @@ if __name__ == "__main__":
     parser = TrlParser((MyScriptArguments, SFTConfig, ModelConfig))
     args, config, model_config = parser.parse_args_and_config()
 
-    if args.output_global_parent_dir is not None:
-        run_id = os.path.basename(os.getcwd())
-        config.output_dir = os.path.join(
-            args.output_global_parent_dir, run_id, config.output_dir
-        )
-
     if args.wandb_run_id == "slurm":
         run_id = os.environ["SLURM_JOB_ID"]
         config_name = os.path.basename(config.output_dir)
         # save to parent / slurm id / output_dir
         if args.output_global_parent_dir is not None:
-            config.output_dir = os.path.join(
-                args.output_global_parent_dir, run_id, config.output_dir
+            args.output_global_parent_dir = os.path.join(
+                args.output_global_parent_dir,
+                run_id,
             )
         os.environ["WANDB_RUN_ID"] = run_id + "_" + config_name
+
+    if args.output_global_parent_dir is not None:
+        config.output_dir = os.path.join(
+            args.output_global_parent_dir, config.output_dir
+        )
 
     ################
     # Model & Tokenizer
