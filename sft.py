@@ -10,7 +10,7 @@ from trl.trainer.utils import (
     get_kbit_device_map,
     get_peft_config,
     get_quantization_config,
-    SIMPLE_CHAT_TEMPLATE,
+    SIMPLE_SFT_CHAT_TEMPLATE,
 )
 
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     )
     tokenizer = AutoTokenizer.from_pretrained(model_config.model_name_or_path)
     if tokenizer.chat_template is None:
-        tokenizer.chat_template = SIMPLE_CHAT_TEMPLATE
+        tokenizer.chat_template = SIMPLE_SFT_CHAT_TEMPLATE
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
