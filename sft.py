@@ -1,5 +1,5 @@
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
 import torch
@@ -15,11 +15,9 @@ from trl.trainer.utils import (
 
 @dataclass
 class MyScriptArguments(ScriptArguments):
-    output_global_parent_dir: str = field(default=None)
-    wandb_run_id: Optional[str] = field(default=None)
-    sanity_check: bool = field(
-        default=False, metadata={"help": "only train on 1000 samples"}
-    )
+    output_global_parent_dir: str = None
+    wandb_run_id: Optional[str] = None
+    sanity_check: bool = False
 
 
 if __name__ == "__main__":

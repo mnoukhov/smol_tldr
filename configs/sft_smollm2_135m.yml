@@ -1,12 +1,12 @@
 # output and name
 run_name: sft_smol135m
 output_dir: sft_smol135m
-hub_model_id: SmolLM2-135M-Instruct_tldr-sft
+hub_model_id: SmolLM2-135M-tldr-sft
 output_global_parent_dir: /network/scratch/n/noukhovm/rlhf-bpo/results
 wandb_run_id: slurm
 push_to_hub: True
 # tldr stuff
-model_name_or_path: HuggingFaceTB/SmolLM2-135M-Instruct
+model_name_or_path: HuggingFaceTB/SmolLM2-135M
 dataset_name: trl-lib/tldr
 dataset_test_split: validation
 report_to: wandb
@@ -18,7 +18,6 @@ gradient_accumulation_steps: 4
 per_device_train_batch_size: 32
 per_device_eval_batch_size: 8
 num_train_epochs: 1
-max_seq_length: 580
 gradient_checkpointing: False
 eval_strategy: "steps"
 eval_steps: 0.2
