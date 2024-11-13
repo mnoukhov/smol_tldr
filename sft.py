@@ -12,9 +12,11 @@ from trl.trainer.utils import (
     get_quantization_config,
 )
 
-# better chat template joins messages with space and removes EOS if generating
-NON_INSTRUCT_CHAT_TEMPLATE = """
-{{- messages | selectattr("content", "defined") | map(attribute="content") | join(" ") -}}
+# correct chat template for TLDR
+# 1. joins messages without space since its already at start of completion
+# 2. removes EOS if generation_prompt
+TLDR_CHAT_TEMPLATE = """
+{{- messages | selectattr("content", "defined") | map(attribute="content") | join() -}}
 {%- if not add_generation_prompt %}
     {{- eos_token }}
 {%- endif %}
@@ -68,7 +70,7 @@ if __name__ == "__main__":
     )
     tokenizer = AutoTokenizer.from_pretrained(model_config.model_name_or_path)
     if tokenizer.chat_template is None:
-        tokenizer.chat_template = NON_INSTRUCT_CHAT_TEMPLATE
+        tokenizer.chat_template = TLDR_CHAT_TEMPLATE
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
