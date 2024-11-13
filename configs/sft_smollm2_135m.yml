@@ -22,4 +22,3 @@ gradient_checkpointing: False
 eval_strategy: "steps"
 eval_steps: 0.2
 logging_steps: 100
-ddp_find_unused_parameters: False

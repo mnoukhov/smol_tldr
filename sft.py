@@ -10,8 +10,15 @@ from trl.trainer.utils import (
     get_kbit_device_map,
     get_peft_config,
     get_quantization_config,
-    SIMPLE_SFT_CHAT_TEMPLATE,
 )
+
+# better chat template joins messages with space and removes EOS if generating
+NON_INSTRUCT_CHAT_TEMPLATE = """
+{{- messages | selectattr("content", "defined") | map(attribute="content") | join(" ") -}}
+{%- if not add_generation_prompt %}
+    {{- eos_token }}
+{%- endif %}
+"""
 
 
 @dataclass
@@ -61,7 +68,7 @@ if __name__ == "__main__":
     )
     tokenizer = AutoTokenizer.from_pretrained(model_config.model_name_or_path)
     if tokenizer.chat_template is None:
-        tokenizer.chat_template = SIMPLE_SFT_CHAT_TEMPLATE
+        tokenizer.chat_template = NON_INSTRUCT_CHAT_TEMPLATE
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
