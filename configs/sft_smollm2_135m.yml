@@ -20,5 +20,5 @@ per_device_eval_batch_size: 8
 num_train_epochs: 1
 gradient_checkpointing: False
 eval_strategy: "steps"
-eval_steps: 0.2
+eval_steps: 0.25
 logging_steps: 100
