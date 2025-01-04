@@ -69,8 +69,7 @@ if __name__ == "__main__":
         quantization_config=quantization_config,
     )
     tokenizer = AutoTokenizer.from_pretrained(model_config.model_name_or_path)
-    if tokenizer.chat_template is None:
-        tokenizer.chat_template = TLDR_CHAT_TEMPLATE
+    tokenizer.chat_template = TLDR_CHAT_TEMPLATE
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token

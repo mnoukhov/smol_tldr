@@ -2,7 +2,7 @@
 run_name: sft_smol135m
 output_dir: sft_smol135m
 hub_model_id: SmolLM2-135M-tldr-sft
-output_global_parent_dir: /network/scratch/n/noukhovm/rlhf-bpo/results
+output_global_parent_dir: /network/scratch/n/noukhovm/smol_tldr/results
 wandb_run_id: slurm
 push_to_hub: True
 # tldr stuff
