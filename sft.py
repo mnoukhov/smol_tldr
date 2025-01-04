@@ -85,7 +85,8 @@ if __name__ == "__main__":
 
         config.report_to = []
         config.push_to_hub = False
-        config.save_strategy = "no"
+        config.eval_stategy = "no"
+        # config.save_strategy = "no"
 
     train_dataset = datasets[args.dataset_train_split]
     eval_dataset = datasets[args.dataset_test_split]
