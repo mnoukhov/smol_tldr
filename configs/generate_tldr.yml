@@ -4,5 +4,6 @@ dataset_name: trl-lib/tldr
 dataset_test_split: validation
 max_new_tokens: 128
 temperature: 0.010001
+torch_dtype: bfloat16
 # generate_batch_size: 16
 # gen_dtype: float16

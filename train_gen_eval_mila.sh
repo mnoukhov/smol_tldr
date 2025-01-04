@@ -10,7 +10,7 @@
 
 set -e
 source mila.sh
-# $@
+$@
 
 if [[ "$@" == *"sanity_check"* ]]; then
     DEBUG_ARG=" --sanity_check"
@@ -21,7 +21,7 @@ fi
 MODEL_PATH=$(readlink -f output_dir)
 echo "Using output dir symlinked: $MODEL_PATH"
 MODEL_PATH_ARG="--model_name_or_path $MODEL_PATH"
-# python generate_for_eval.py --config configs/generate_tldr.yml $MODEL_PATH_ARG $DEBUG_ARG
+python generate_for_eval.py --config configs/generate_tldr.yml $MODEL_PATH_ARG $DEBUG_ARG
 
 if [[ "$MODEL_PATH" == *"smol135m"* ]]; then
     REF_ARG=" --ref_model_name mnoukhov/SmolLM2-135M-Instruct_tldr-sft"
